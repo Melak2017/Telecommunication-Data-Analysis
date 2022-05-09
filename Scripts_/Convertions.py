@@ -8,6 +8,15 @@ class CleanTelecomData:
 
         print('Automation in Action...!!!')
 
+    def convert_to_datetime(self, df: pd.DataFrame) -> pd.DataFrame:
+
+        df['start'] = pd.to_datetime(
+            df['start'])
+        df['end'] = pd.to_datetime(
+            df['end'])
+
+        return df
+
     def convert_to_mega_bytes(self, df):
 
         df = self.__convert_bytes_to_megabytes(df, 'social_media_dl_(bytes)')
