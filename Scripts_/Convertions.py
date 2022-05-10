@@ -75,3 +75,7 @@ class CleanTelecomData:
         megabyte_col = df[bytes_data] / megabyte
 
         return megabyte_col
+
+    def get_info(self) -> pd.DataFrame:
+
+        return self.df.info()
