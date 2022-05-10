@@ -31,13 +31,6 @@ class CleanTelecomData:
 
         return self.df
 
-    def __convert_bytes_to_megabytes(df, bytes_data):
-
-        megabyte = 1*10e+5
-        megabyte_col = df[bytes_data] / megabyte
-
-        return megabyte_col
-
     def get_info(self) -> pd.DataFrame:
 
         return self.df.info()
