@@ -17,57 +17,19 @@ class CleanTelecomData:
 
         return df
 
-    def convert_to_mega_bytes(self, df):
+    def bytes_to_megabytes(self, columns: list) -> pd.DataFrame:
 
-        df = self.__convert_bytes_to_megabytes(df, 'social_media_dl_(bytes)')
-        df = self.__convert_bytes_to_megabytes(df, 'social_media_ul_(bytes)')
+        try:
+            megabyte = 1*10e+5
+            for x in columns:
+                self.df[x] = self.df[x] / megabyte
+                self.df.rename(
+                    columns={x: f'{x[:-7]}(MegaBytes)'}, inplace=True)
 
-        df = self.__convert_bytes_to_megabytes(df, "google_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "google_ul_(bytes)")
+        except:
+            print('failed to convert to MB')
 
-        df = self.__convert_bytes_to_megabytes(df, "email_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "email_ul_(bytes)")
-
-        df = self.__convert_bytes_to_megabytes(df, "youtube_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "youtube_ul_(bytes)")
-
-        df = self.__convert_bytes_to_megabytes(df, "netflix_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "netflix_ul_(bytes)")
-
-        df = self.__convert_bytes_to_megabytes(df, "gaming_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "gaming_ul_(bytes)")
-
-        df = self.__convert_bytes_to_megabytes(df, "other_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "other_ul_(bytes)")
-
-        df = self.__convert_bytes_to_megabytes(df, "total_dl_(bytes)")
-        df = self.__convert_bytes_to_megabytes(df, "total_ul_(bytes)")
-
-        converted_df = df.rename(columns={'social_media_dl_(bytes)': 'social_media_dl',
-                                          'social_media_ul_(bytes)': 'social_media_ul',
-
-                                          'google_dl_(bytes)': 'google_dl',
-                                          'google_ul_(bytes)': 'google_ul',
-
-                                          'email_dl_(bytes)': 'email_dl',
-                                          'email_ul_(bytes)': 'email_ul',
-
-                                          'youtube_dl_(bytes)': 'youtube_dl',
-                                          'youtube_ul_(bytes)': 'youtube_ul',
-
-                                          'netflix_dl_(bytes)': 'netflix_dl',
-                                          'netflix_ul_(bytes)': 'netflix_ul',
-
-                                          'gaming_dl_(bytes)': 'gaming_dl',
-                                          'gaming_ul_(bytes)': 'gaming_ul',
-
-                                          'other_dl_(bytes)': 'other_dl',
-                                          'other_ul_(bytes)': 'other_ul',
-
-                                          'total_dl_(bytes)': 'total_dl',
-                                          'total_ul_(bytes)': 'total_ul',
-                                          })
-        return converted_df
+        return self.df
 
     def __convert_bytes_to_megabytes(df, bytes_data):
 
@@ -75,3 +37,7 @@ class CleanTelecomData:
         megabyte_col = df[bytes_data] / megabyte
 
         return megabyte_col
+
+    def get_info(self) -> pd.DataFrame:
+
+        return self.df.info()
