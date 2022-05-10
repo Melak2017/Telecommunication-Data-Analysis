@@ -11,6 +11,9 @@ class DataDescription:
 
         return self.df.describe()
 
+    def show_datatypes(self) -> pd.DataFrame:
+        return self.df.dtypes
+
     def get_matrix_correlation(self):
         return self.df.corr()
 
