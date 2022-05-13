@@ -58,7 +58,7 @@ class Dashboard:
         self.title = title
         self.page = None
         self.df: pd.DataFrame = self.load_data(
-            cleaned_data_csv).copy(deep=True)
+            cleaned_data_csv)  # .copy(deep=True)
 
         self.df = self.df.rename(columns={'msisdn/number': 'msisdn'})
         self.df = self.df.rename(columns={'dur._(ms)': 'duration'})
@@ -117,18 +117,10 @@ class Dashboard:
             st.markdown("### User Overview Analysis")
             self.render_overview()
 
-        elif (self.page == "User Engagement Analysis"):
-            st.markdown("### User Engagement Analysis")
-            self.top_customers_session_freq()
-        elif (self.page == "User Experience Analysis"):
-            st.markdown("### User Experience Analysis")
-
     def render_overview(self):
 
         self.top_handset_type()
         self.top_manufacturer()
-        self.top_handset_by_manufacturer()
-        self.top_freq_users()
 
 
 if __name__ == "__main__":
