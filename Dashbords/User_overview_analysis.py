@@ -1,12 +1,7 @@
 import numpy as np
 import pandas as pd
 import streamlit as st
-import altair as alt
-import plotly.express as px
-import plotly.graph_objects as go
-import plotly.figure_factory as ff
 import numpy as np
-
 
 import sys
 import os
